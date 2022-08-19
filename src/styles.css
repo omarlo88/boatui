@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* bootstrap */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+/* Utilities */
+@import "assets/css/_utilities.scss";
+
+.navbar.navbar--top {
+  height: 54px;
+  min-height: 54px;
+}
+
+.space-lgx {
+  margin-top: 7rem !important;
+}
+
+.no-margin {
+  margin: 0 0 0 !important;
+}
+
+.navbar--footer-fixme {
+  min-height: inherit;
+  margin-bottom: inherit;
+  max-height: 26px;
+  height: 26px;
+}
+
+.space--left {
+  left: 10%;
+}
+

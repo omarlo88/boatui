@@ -1,0 +1,7 @@
+// Those are required files of Bootstrap 4 if you want to use their SASS api / functionalities (and
+// in that order I think..). Check doc https://getbootstrap.com/docs/4.0/getting-started/theming/#importing
+//
+// Note: should be ok to import this as much as we want since we does not generate .css, just provides fns, mixins etc.
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";

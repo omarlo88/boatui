@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  version: require('../../package.json').version,
+  year: require('../../package.json').year,
+  refreshTokenInterval: 600000,
+  backUrl: 'http://localhost:8080/acmdemosvc/api',
 };
 
 /*
