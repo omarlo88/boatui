@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'baot-login',
@@ -7,16 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
-
-  }
-
-  reset(event: MouseEvent): void {
-
+    this.router.navigate(['/boats']);
   }
 }

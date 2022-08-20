@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoatsComponent implements OnInit {
 
+  boats: any = [];
+  loading = false;
+  totalElements: number = 0;
+  size: number = 5;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  loadLazy(event: any): void {
+
+  }
+
+  selectBoat(boat: any) {
+
+  }
 }

@@ -1,1 +1,63 @@
-<p>boats works!</p>
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-sm-7">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Total elements ({{ totalElements }})</h4>
+        </div>
+
+        <div class="card-body">
+
+          <p-table [value]="boats" [loading]="loading"
+                   [lazy]="true" [paginator]="true" (onLazyLoad)="loadLazy($event)"
+                   [rows]="size" [totalRecords]="totalElements"
+                   [responsive]="true" [resizableColumns]="true">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th style="width: 15%">Num</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th class="detail">
+              <span class="fa fa-info-circle"
+                    pTooltip="Details"
+                    [tooltipPosition]="'top'"></span>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-columns="columns" let-boat>
+              <tr>
+                <td>1</td>
+                <td>Test</td>
+                <td>100</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary" (click)="selectBoat(boat)">
+                    <span class="fa fa-search"></span>
+                  </button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="4">Empty</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Details</h4>
+        </div>
+
+        <div class="card-body">
+
+         Details
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

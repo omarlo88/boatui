@@ -30,3 +30,7 @@
   left: 10%;
 }
 
+.detail {
+  text-align: center !important;
+  width: 4em;
+}

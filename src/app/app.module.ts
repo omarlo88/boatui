@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { CoreModule } from './core/core.module';
 import { BoatsRoutingModule } from './boats/boats-routing.module';
+import { BoatsModule } from './boats/boats.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BoatsRoutingModule } from './boats/boats-routing.module';
     BoatsRoutingModule,
     AppRoutingModule,
     LayoutModule,
-    CoreModule
+    CoreModule,
+    BoatsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

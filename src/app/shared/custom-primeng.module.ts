@@ -2,15 +2,21 @@ import { NgModule } from '@angular/core';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
 @NgModule({
   imports: [
-    ToastModule
+    ToastModule,
+    TableModule,
+    TooltipModule
   ],
   exports:[
-    ToastModule
+    ToastModule,
+    TableModule,
+    TooltipModule
   ],
   providers: [
     ConfirmationService,
