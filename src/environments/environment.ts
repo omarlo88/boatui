@@ -7,7 +7,7 @@ export const environment = {
   version: require('../../package.json').version,
   year: require('../../package.json').year,
   refreshTokenInterval: 600000,
-  backUrl: 'http://localhost:8080/acmdemosvc/api',
+  backUrl: 'http://localhost:8082/boatsvc/api',
 };
 
 /*

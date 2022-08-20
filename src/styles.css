@@ -34,3 +34,13 @@
   text-align: center !important;
   width: 4em;
 }
+
+.flag-disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.input-group.input-group--prependfix {
+  flex-wrap: nowrap !important;
+  height: max-content;
+}

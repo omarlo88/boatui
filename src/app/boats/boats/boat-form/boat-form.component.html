@@ -1,0 +1,66 @@
+<div *ngIf="display">
+<form [formGroup]="boatForm">
+  <div class="row mt-2">
+    <div class="col-sm p-fluid grid">
+      <input type="text" id="inputtext" pInputText maxlength="50"
+             formControlName="name"
+             placeholder="Name ...">
+    </div>
+
+    <div class="col-sm">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">CHF</span>
+        <p-inputNumber id="priceDutyFree"
+                       formControlName="priceDutyFree"
+                       currency="CHF" locale="en-CH"
+                       [maxlength]="14" [minFractionDigits]="2" placeholder="Price ..."></p-inputNumber>
+      </div>
+    </div>
+  </div>
+
+  <div  *ngIf="displayMode">
+    <div class="form-group row mt-3">
+      <label
+        class="col-sm-3 col-form-label">Total Amount</label>
+      <div class="col-sm-8">
+        <label class="col-form-label">{{boat.totalAmount | currency: 'CHF ': 'symbol'}}</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row mt-3">
+    <div>
+      <textarea id="bcDescription" class="form-control" rows="3"
+                formControlName="description"
+                maxlength="4000"
+                placeholder="Description ..."></textarea>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <!-- buttons actions -->
+    <div class="col-sm">
+      <button type="button" class="btn btn-warning w-100"
+              title="Cancel" (click)="cancel($event)">
+        <span class="fa fa-arrow-left me-1"></span>&nbsp;Cancel
+      </button>
+    </div>
+
+    <div class="col-sm">
+      <button type="button" class="btn btn-success w-100"
+              title="Save"
+              [class]="{ 'flag-disabled': !boatForm.valid }"
+              [disabled]="!boatForm.valid" (click)="saveBoat($event)">
+        Save
+        <span class="fa fa-check me-1"></span>
+      </button>
+    </div>
+
+  </div>
+
+</form>
+</div>
+
+<div *ngIf="submitted" class="waiting-callback-action">
+  <p-progressSpinner strokeWidth="4"></p-progressSpinner>
+</div>

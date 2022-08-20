@@ -11,5 +11,35 @@ h1, h2, h3, h4, h5, h6 {
   color: #cc2e22;
 }
 
+.ng-invalid:not(form),
+.ng-invalid:not(form) .p-inputtext,
+.ng-invalid:not(form).p-inputtextarea,
+.ng-invalid:not(form) .p-dropdown.p-component {
+  border: 2px solid #a94442;
+}
 
+.waiting-callback-action {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.waiting-callback-action:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.53);
+}
 

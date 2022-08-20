@@ -15,7 +15,9 @@ import { RouterModule } from '@angular/router';
     RouterModule,
   ],
   exports: [
+    CommonModule,
     RouterModule,
+    ReactiveFormsModule,
     CustomPrimengModule
   ]
 })

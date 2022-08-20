@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoatsComponent } from './boats/boats.component';
 
 const routes: Routes = [
-  { path: 'boats', component: BoatsComponent }
+  {
+    path: '', component: BoatsComponent,
+    // canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

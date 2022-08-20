@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="display">
   <div class="row mt-3">
-    <div class="col-sm-7">
+    <div class="col-sm">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Total elements ({{ totalElements }})</h4>
@@ -9,29 +9,47 @@
         <div class="card-body">
 
           <p-table [value]="boats" [loading]="loading"
-                   [lazy]="true" [paginator]="true" (onLazyLoad)="loadLazy($event)"
+                   [lazy]="true" [paginator]="true"
                    [rows]="size" [totalRecords]="totalElements"
-                   [responsive]="true" [resizableColumns]="true">
+                   [responsive]="true" [resizableColumns]="true" styleClass="p-datatable-gridlines"
+                   selectionMode="single" [(selection)]="selected" dataKey="id"
+                   (onRowSelect)="onRowSelect($event)">
             <ng-template pTemplate="header" let-columns>
               <tr>
-                <th style="width: 15%">Num</th>
+                <th style="width: 15%">#</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th class="detail">
-              <span class="fa fa-info-circle"
-                    pTooltip="Details"
-                    [tooltipPosition]="'top'"></span>
+                  <span class="fa fa-info-circle"
+                        pTooltip="Edid"
+                        [tooltipPosition]="'top'"></span>
+                </th>
+                <th class="detail">
+                  <span class="fa fa-info-circle"
+                        pTooltip="Delete"
+                        [tooltipPosition]="'top'"></span>
                 </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-columns="columns" let-boat>
-              <tr>
-                <td>1</td>
-                <td>Test</td>
-                <td>100</td>
+              <tr [pSelectableRow]="boat" [pSelectableRowDisabled]="displayBoatEditOrView || displayBoatAdd">
                 <td>
-                  <button class="btn btn-sm btn-outline-primary" (click)="selectBoat(boat)">
-                    <span class="fa fa-search"></span>
+                  <span class="badge bg-secondary">{{boat.id}}</span>
+                </td>
+                <td>{{boat.name}}</td>
+                <td>{{boat.totalAmount | currency: 'CHF ': 'symbol'}}</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-success" (click)="editBoat(boat)"
+                          [disabled]="displayBoatEditOrView"
+                          [class]="{'flag-disabled': displayBoatEditOrView}">
+                    <span class="fa fa-edit"></span>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteBoat(boat)"
+                          [disabled]="displayBoatEditOrView"
+                          [class]="{'flag-disabled': displayBoatEditOrView}">
+                    <span class="fa fa-trash"></span>
                   </button>
                 </td>
               </tr>
@@ -41,23 +59,44 @@
                 <td [attr.colspan]="4">Empty</td>
               </tr>
             </ng-template>
+            <ng-template pTemplate="summary">
+              <div style="text-align:left">
+                <button type="button" class="btn btn-success" *ngIf="!displayBoatEditOrView"
+                        [disabled]="addMode"
+                        [class]="{'flag-disabled': addMode}"
+                        (click)="showAddForm()">
+                  <span class="fa fa-plus me-1"></span>Add
+                </button>
+              </div>
+            </ng-template>
           </p-table>
 
         </div>
       </div>
     </div>
-    <div class="col-sm">
+    <div class="col-sm" *ngIf="displayBoatEditOrView || displayBoatAdd">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Details</h4>
+          <h4 *ngIf="addMode" class="card-title">New Boat</h4>
+          <h4 *ngIf="editMode" class="card-title">Edit Boat num {{selectedItemId}}</h4>
+          <h4 *ngIf="displayMode" class="card-title">Details Boat num {{selectedItemId}}</h4>
         </div>
 
         <div class="card-body">
-
-         Details
-
+          <div *ngIf="displayBoatAdd">
+            <baot-boat-form [addBoatMode]="addMode"
+                            (displayBoatAdd)="handleAddBoat($event)"></baot-boat-form>
+          </div>
+          <div *ngIf="displayBoatEditOrView">
+            <baot-boat-form [editMode]="editMode"
+                            [displayMode]="displayMode"
+                            [boatId]="selectedItemId"
+                            (displayBoatEdit)="handleEditBoat($event)"></baot-boat-form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
