@@ -14,6 +14,8 @@ export class AuthService extends GenericService<LoginResponseData> {
 
   private currentUserProfile: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
+  authenticated = false;
+
   /**
    * Constructor of BoatsService.
    *
@@ -23,14 +25,19 @@ export class AuthService extends GenericService<LoginResponseData> {
     super(http, '/login');
   }
 
-  login({username, password}): Observable<User> {
+  isAuthenticated(): boolean {
+    return this.authenticated;
+  }
+
+  login({ username, password }): Observable<User> {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
     return this.http.post<LoginResponseData>(this.url, formData).pipe(
       switchMap((data: LoginResponseData) => {
-        const {accessToken, refreshToken} = data;
+        const { accessToken, refreshToken } = data;
         if (accessToken && refreshToken) {
+          this.authenticated = true;
           TokenInterceptorInterceptor.accessToken = accessToken;
           TokenInterceptorInterceptor.refreshToken = refreshToken;
           return this.userService.getCurrentUser();
@@ -42,6 +49,7 @@ export class AuthService extends GenericService<LoginResponseData> {
 
   logout(): void {
     // TODO send the request to logout
+    this.authenticated = false;
     this.next(null);
     TokenInterceptorInterceptor.accessToken = '';
     TokenInterceptorInterceptor.refreshToken = '';
