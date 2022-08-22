@@ -30,6 +30,10 @@
   left: 10%;
 }
 
+.space--right {
+  width: 96% !important;
+}
+
 .detail {
   text-align: center !important;
   width: 4em;

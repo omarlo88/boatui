@@ -8,7 +8,7 @@ export const defaultLocale = 'fr';
 @Injectable({
   providedIn: 'root'
 })
-export abstract class GenericService<T extends { id?: number }> {
+export abstract class GenericService<T> {
 
   /**
    *  Default root url
@@ -98,7 +98,7 @@ export abstract class GenericService<T extends { id?: number }> {
    * @param: dto
    */
   update(dto: T): Observable<T> {
-    return this.put(`${this.url}/${dto.id}`, dto);
+    return this.put(`${this.url}/${dto['id']}`, dto);
   }
 
   /**
