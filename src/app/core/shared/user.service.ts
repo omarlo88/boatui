@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from '../../shared/api/generic.service';
-import { LoginResponseData } from '../../boats/boats/shared/model/login-response-data';
-import { User } from '../../boats/boats/shared/model/user';
+import { User } from './model/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

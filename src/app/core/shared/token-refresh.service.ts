@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { defaultLocale, GenericService } from '../../shared/api/generic.service';
-import { LoginResponseData } from '../../boats/boats/shared/model/login-response-data';
+import { LoginResponseData } from './model/login-response-data';
 
 @Injectable({
   providedIn: 'root'

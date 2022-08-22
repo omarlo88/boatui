@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GenericService } from '../../shared/api/generic.service';
-import { BehaviorSubject, EMPTY, Observable, of, switchMap, tap } from 'rxjs';
-import { LoginResponseData } from '../../boats/boats/shared/model/login-response-data';
-import { User } from '../../boats/boats/shared/model/user';
+import { BehaviorSubject, EMPTY, Observable, switchMap } from 'rxjs';
+import { LoginResponseData } from './model/login-response-data';
+import { User } from './model/user';
 import { UserService } from './user.service';
 import { TokenInterceptorInterceptor } from './token-interceptor.interceptor';
 

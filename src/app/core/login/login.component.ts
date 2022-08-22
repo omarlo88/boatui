@@ -1,12 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BoatsService } from '../../boats/boats/shared/boats.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../shared/auth.service';
-import { LoginResponseData } from '../../boats/boats/shared/model/login-response-data';
-import { of, switchMap } from 'rxjs';
-import { User } from '../../boats/boats/shared/model/user';
+import { User } from '../shared/model/user';
 
 @Component({
   selector: 'baot-login',
