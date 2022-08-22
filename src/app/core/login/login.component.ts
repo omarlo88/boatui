@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (data: User) => {
           if (data && data.id) {
             this.authService.next(data);
-            console.log(data);
             this.router.navigate(['/boats']);
           } else {
             this._getMessageLoginFail();

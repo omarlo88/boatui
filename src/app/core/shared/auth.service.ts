@@ -31,7 +31,6 @@ export class AuthService extends GenericService<LoginResponseData> {
       switchMap((data: LoginResponseData) => {
         const {accessToken, refreshToken} = data;
         if (accessToken && refreshToken) {
-          console.log(data);
           TokenInterceptorInterceptor.accessToken = accessToken;
           TokenInterceptorInterceptor.refreshToken = refreshToken;
           return this.userService.getCurrentUser();
