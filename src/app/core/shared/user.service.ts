@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class UserService extends GenericService<User> {
 
   /**
-   * Constructor of BoatsService.
+   * Constructor of UserService.
    *
    * @param: http
    */

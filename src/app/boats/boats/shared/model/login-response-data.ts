@@ -1,4 +1,4 @@
 export interface LoginResponseData {
   accessToken: string;
-  refleshToken: string;
+  refreshToken: string;
 }

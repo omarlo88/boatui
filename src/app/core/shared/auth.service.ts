@@ -29,14 +29,23 @@ export class AuthService extends GenericService<LoginResponseData> {
     formData.append('password', password);
     return this.http.post<LoginResponseData>(this.url, formData).pipe(
       switchMap((data: LoginResponseData) => {
-        const {accessToken, refleshToken} = data;
-        if (accessToken && refleshToken) {
+        const {accessToken, refreshToken} = data;
+        if (accessToken && refreshToken) {
+          console.log(data);
           TokenInterceptorInterceptor.accessToken = accessToken;
+          TokenInterceptorInterceptor.refreshToken = refreshToken;
           return this.userService.getCurrentUser();
         }
         return EMPTY;
       })
     );
+  }
+
+  logout(): void {
+    // TODO send the request to logout
+    this.next(null);
+    TokenInterceptorInterceptor.accessToken = '';
+    TokenInterceptorInterceptor.refreshToken = '';
   }
 
   next(user: User): void {

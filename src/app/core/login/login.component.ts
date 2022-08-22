@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
 
   /**
-   * Constructor of BoatFormComponent.
+   * Constructor of LoginComponent.
    *
    * @param: router
    * @param: authService
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (data: User) => {
           if (data && data.id) {
             this.authService.next(data);
+            console.log(data);
             this.router.navigate(['/boats']);
           } else {
             this._getMessageLoginFail();

@@ -11,7 +11,7 @@ export class AppComponent implements OnInit, OnDestroy {
   display = false;
 
   versionApp = environment.version;
-  yearApp = environment.year;
+  yearApp = '2022';
 
   ngOnInit(): void {
     this.display = true;

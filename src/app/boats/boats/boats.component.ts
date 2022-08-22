@@ -3,6 +3,8 @@ import { BoatsService } from './shared/boats.service';
 import { Boat } from './shared/boat.model';
 import { tap } from 'rxjs';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { AuthService } from '../../core/shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'baot-boats',
@@ -30,10 +32,14 @@ export class BoatsComponent implements OnInit, OnDestroy {
    * @param: boatsService
    * @param: confirmService
    * @param: msgService
+   * @param: authService
+   * @param: router
    */
   constructor(private boatsService: BoatsService,
               private confirmService: ConfirmationService,
-              private msgService: MessageService) { }
+              private msgService: MessageService,
+              private authService: AuthService,
+              private router: Router,) { }
 
   ngOnInit(): void {
     this.findAll();
@@ -142,5 +148,10 @@ export class BoatsComponent implements OnInit, OnDestroy {
     this.findAll();
     this.displayBoatEditOrView = event;
     this.editMode = event;
+  }
+
+  logout(): Promise<boolean> {
+    this.authService.logout();
+    return this.router.navigate(['/login']);
   }
 }
