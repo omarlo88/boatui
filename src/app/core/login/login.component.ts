@@ -37,24 +37,36 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(event: MouseEvent): void {
     if (event) {
-      console.log(this.loginForm.value)
       const formData = this.loginForm.value;
       this.authService.login(formData)
       .subscribe({
-        next: (data) => {
-          console.log(data)
-          this.router.navigate(['/boats']);
+        next: (data: User) => {
+          if (data && data.id) {
+            this.authService.next(data);
+            this.router.navigate(['/boats']);
+          } else {
+            this._getMessageLoginFail();
+          }
         },
         error: err => {
-console.log(err)
+          console.log(err);
+          this._getMessageLoginFail();
         }
       })
     }
-
-
     if (event.preventDefault) {
       event.preventDefault();
     }
+  }
+
+  private _getMessageLoginFail(): void {
+    const msg = {
+      severity: 'error',
+      summary: 'Login..',
+      detail: 'Not authorize !!'
+    };
+
+    this.msgService.add(msg);
   }
 
   ngOnDestroy(): void {

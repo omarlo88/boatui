@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-lg navbar-dark bg-dark navbar--top">
   <a class="navbar-brand logo">BOAT</a>
-  <!-- Toggler/collapsibe Button -->
+
   <button class="navbar-toggler" type="button" data-toggle="collapse"
           [attr.data-target]="'#'+ navbarId" [attr.aria-controls]="navbarId"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -10,44 +10,15 @@
   <!-- Menu links -->
   <nav class="collapse navbar-collapse" [id]="navbarId">
 
-   <!-- <ul id="navbar" class="nav navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('dashboard')">
-        <a class="nav-link" [routerLink]="['/dashboard']">{{ 'ui.header.dashboard' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('cases')">
-        <a class="nav-link" [routerLink]="['/cases']">{{ 'ui.header.cases' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('tasks')">
-        <a class="nav-link" [routerLink]="['/tasks']">{{ 'ui.header.tasks' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('optimize')">
-        <a class="nav-link" [routerLink]="['/optimize']">{{ 'ui.header.optimize' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('persons')" *ngIf="isAdmin">
-        <a class="nav-link" [routerLink]="['/persons']">{{ 'ui.header.persons' | translate }}</a>
-      </li>
-      <li class="nav-item" routerLinkActive="{ active }" (click)="switchMenu('users')" *ngIf="isAdmin">
-        <a class="nav-link" [routerLink]="['/users']">{{ 'ui.header.users' | translate }}</a>
-      </li>
-
-    </ul>-->
-
-    <!-- Icons actions (language + logout)-->
     <ul
       class="nav navbar-nav float-right menualignmentright padding-left-lg  u-navcollapsed-pt-fix align-right-in-parent-flex_">
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="loggedUser">
         <a class="nav-link dropdown-toggle text-bold-" href="#" id="navbarDropdownMenuLink"
            data-toggle="dropdown">
           <i class="far fa-user"></i>
-          <span class="padding-left-xxs fw-bold">Omar LO</span>
+          <span class="padding-left-xxs fw-bold">{{loggedUser?.fullName}}</span>
         </a>
       </li>
-
-      <!--<li class="nav-item" *ngIf="!currentUser">
-        <a class="nav-link text-bold" (click)="switchLogin()">
-          <i class="fas fa-sign-in-alt"></i>&nbsp;{{ 'ui.login' | translate }}
-        </a>
-      </li>-->
 
       <li class="nav-item switch_">
         <img src="{{ urlFr }}" style="margin-top: -19px" alt="FR"/>
