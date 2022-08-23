@@ -12,11 +12,11 @@
 
     <ul
       class="nav navbar-nav float-right menualignmentright padding-left-lg  u-navcollapsed-pt-fix align-right-in-parent-flex_">
-      <li class="nav-item dropdown" *ngIf="loggedUser">
+      <li class="nav-item dropdown" *ngIf="currentUser">
         <a class="nav-link dropdown-toggle text-bold-" href="#" id="navbarDropdownMenuLink"
            data-toggle="dropdown">
           <i class="far fa-user"></i>
-          <span class="padding-left-xxs fw-bold">{{loggedUser?.fullName}}</span>
+          <span class="padding-left-xxs fw-bold">{{currentUser?.fullName}}</span>
         </a>
       </li>
 

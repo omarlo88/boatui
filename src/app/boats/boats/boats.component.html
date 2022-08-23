@@ -36,7 +36,7 @@
                         pTooltip="Edid"
                         [tooltipPosition]="'top'"></span>
                 </th>
-                <th class="detail">
+                <th class="detail" *ngIf="isAdmin">
                   <span class="fa fa-info-circle"
                         pTooltip="Delete"
                         [tooltipPosition]="'top'"></span>
@@ -57,7 +57,7 @@
                     <span class="fa fa-edit"></span>
                   </button>
                 </td>
-                <td>
+                <td *ngIf="isAdmin">
                   <button class="btn btn-sm btn-outline-danger" (click)="deleteBoat(boat)"
                           [disabled]="displayBoatEditOrView"
                           [class]="{'flag-disabled': displayBoatEditOrView}">

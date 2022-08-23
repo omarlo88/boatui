@@ -5,6 +5,7 @@ import { BehaviorSubject, EMPTY, Observable, switchMap } from 'rxjs';
 import { LoginResponseData } from './model/login-response-data';
 import { User } from './model/user';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 const ACCESS_TOKEN: string = 'access_token';
 const REFRESH_TOKEN: string = 'refresh_token';
@@ -23,7 +24,9 @@ export class AuthService extends GenericService<LoginResponseData> {
    *
    * @param: http
    */
-  constructor(http: HttpClient, private userService: UserService) {
+  constructor(http: HttpClient,
+              private userService: UserService,
+              private router: Router) {
     super(http, '/login');
   }
 
@@ -79,15 +82,31 @@ export class AuthService extends GenericService<LoginResponseData> {
 
   logout(): void {
     // TODO send the request to logout
-    this.next(null);
+    this.currentUserProfile.next(null);
     this.accessToken = null;
     this.refreshToken = null;
     window.sessionStorage.removeItem(ACCESS_TOKEN);
     window.sessionStorage.removeItem(REFRESH_TOKEN);
+    this.router.navigate([ '/login' ]);
   }
 
-  next(user: User): void {
-    this.currentUserProfile.next(user);
+  next(user?: User): void {
+    if (user) {
+      this.currentUserProfile.next(user);
+    } else {
+      this.userService.getCurrentUser().subscribe({
+        next: (current) => {
+          if (current) {
+            this.currentUserProfile.next(current);
+          }
+        },
+        error: err => {
+          console.log(err)
+          this.currentUserProfile.next(null);
+          this.logout();
+        }
+      });
+    }
   }
 
   getCurrentUserProfileEvent(): Observable<User> {

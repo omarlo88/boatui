@@ -3,12 +3,13 @@ import { BoatsService } from './shared/boats.service';
 import { Boat } from './shared/boat.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/shared/auth.service';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { User } from '../../core/shared/model/user';
 
 @Component({
   selector: 'baot-boats',
   templateUrl: './boats.component.html',
-  styleUrls: ['./boats.component.css']
+  styleUrls: [ './boats.component.css' ]
 })
 export class BoatsComponent implements OnInit, OnDestroy {
 
@@ -25,6 +26,21 @@ export class BoatsComponent implements OnInit, OnDestroy {
   display = false;
   selected: Boat;
 
+  userEventsSubscription: Subscription;
+  loggedUser = null;
+
+  get currentUser(): User {
+    return this.loggedUser;
+  }
+
+  set currentUser(value: User) {
+    this.loggedUser = value;
+  }
+
+  get isAdmin(): boolean {
+    return this.currentUser && this.currentUser.id && this.currentUser.role === 'ADMIN';
+  }
+
   /**
    * Constructor of BoatsComponent.
    *
@@ -32,15 +48,16 @@ export class BoatsComponent implements OnInit, OnDestroy {
    * @param: confirmService
    * @param: msgService
    * @param: authService
-   * @param: router
    */
   constructor(private boatsService: BoatsService,
               private confirmService: ConfirmationService,
               private msgService: MessageService,
-              private authService: AuthService,
-              private router: Router,) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
+    this.authService.next();
+    this.userEventsSubscription = this.authService.getCurrentUserProfileEvent().subscribe((user) => this.currentUser = user);
     this.findAll();
   }
 
@@ -56,6 +73,9 @@ export class BoatsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.userEventsSubscription) {
+      this.userEventsSubscription.unsubscribe();
+    }
     this.loading = false;
     this.display = false;
   }
@@ -149,8 +169,7 @@ export class BoatsComponent implements OnInit, OnDestroy {
     this.editMode = event;
   }
 
-  logout(): Promise<boolean> {
+  logout(): void {
     this.authService.logout();
-    return this.router.navigate(['/login']);
   }
 }

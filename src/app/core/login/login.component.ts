@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const msg = {
       severity: 'error',
       summary: 'Login..',
-      detail: 'Not authorize !!'
+      detail: 'Not authorize. Please your administrator'
     };
 
     this.msgService.add(msg);
