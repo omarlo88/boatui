@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Boat } from '../shared/boat.model';
 import { BoatsService } from '../shared/boats.service';
 import { MessageService } from 'primeng/api';
@@ -57,7 +57,7 @@ export class BoatFormComponent implements OnInit, OnDestroy {
               private msgService: MessageService) { }
 
   ngOnInit(): void {
-
+    // do nothing
   }
 
   ngOnDestroy(): void {

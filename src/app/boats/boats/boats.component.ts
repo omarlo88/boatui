@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BoatsService } from './shared/boats.service';
 import { Boat } from './shared/boat.model';
-import { tap } from 'rxjs';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from '../../core/shared/auth.service';
 import { Router } from '@angular/router';
@@ -111,7 +110,7 @@ export class BoatsComponent implements OnInit, OnDestroy {
   }
 
   private _getMessageError(err?: any): void {
-    const detailMsg = err && err.error && err.error.message ? err.error.message : '';
+    const detailMsg = err && err.error && err.error.message ? err.error.message : 'You have not permission for this action';
 
     const msg = {
       severity: 'error',
