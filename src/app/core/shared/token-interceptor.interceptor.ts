@@ -8,39 +8,45 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { TokenRefreshService } from './token-refresh.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class TokenInterceptorInterceptor implements HttpInterceptor {
-  static accessToken = '';
-  static refreshToken = '';
   refresh = false;
 
-  constructor(private tokenRefreshService: TokenRefreshService) {}
+  constructor(private tokenRefreshService: TokenRefreshService,
+              private authService: AuthService) {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const req = request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${TokenInterceptorInterceptor.accessToken}`
-      }
-    });
-    return next.handle(req).pipe(catchError((err: HttpErrorResponse) => {
-      if (err.status === 403 && !this.refresh) {
-        this.refresh = true;
-        return this.tokenRefreshService.refreshToken(TokenInterceptorInterceptor.refreshToken).pipe(
-          switchMap((data) => {
-            TokenInterceptorInterceptor.accessToken = data.accessToken;
-            return  next.handle(request.clone({
-                setHeaders: {
-                  Authorization: `Bearer ${TokenInterceptorInterceptor.accessToken}`
+    const isUrlRefreshToken = request.url.indexOf('/token') >= 0
+    if (isUrlRefreshToken) {
+      return next.handle(request);
+    } else {
+      const accessToken = this.authService.getAccessToken();
+      const req = request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      return next.handle(req).pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403 && !this.refresh) {
+          this.refresh = true;
+          return this.tokenRefreshService.refreshToken().pipe(
+            switchMap(({ accessToken, refreshToken }) => {
+              this.authService.storeLoggedJWT(accessToken, refreshToken)
+              return next.handle(request.clone({
+                  setHeaders: {
+                    Authorization: `Bearer ${accessToken}`
+                  }
                 }
-              }
-
-            ));
-          })
-        );
-      }
-      this.refresh = false;
-      return throwError(() => err)
-    }));
+              ));
+            })
+          );
+        }
+        this.refresh = false;
+        return throwError(() => err)
+      }));
+    }
   }
 }
