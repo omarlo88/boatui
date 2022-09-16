@@ -6,6 +6,8 @@
 /* Utilities */
 @import "assets/css/_utilities.scss";
 
+@import "~primeflex/primeflex.css";
+
 .navbar.navbar--top {
   height: 54px;
   min-height: 54px;

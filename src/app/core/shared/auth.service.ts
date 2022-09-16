@@ -72,7 +72,7 @@ export class AuthService extends GenericService<LoginResponseData> {
         if (accessToken && refreshToken) {
           this.accessToken = accessToken;
           this.refreshToken = refreshToken;
-          this.storeLoggedJWT(accessToken, refreshToken)
+          this.storeLoggedJWT(accessToken, refreshToken);
           return this.userService.getCurrentUser();
         }
         return EMPTY;
