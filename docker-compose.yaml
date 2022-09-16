@@ -1,0 +1,12 @@
+services:
+  frontend:
+    image: boatui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:80
+  backend:
+    image: omarlo/first-repository:latest
+    ports:
+      - 8082:8080

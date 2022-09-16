@@ -11,7 +11,9 @@ FROM nginx:alpine
 COPY --from=node /app/dist/boatui /usr/share/nginx/html
 
 
+# Build image => docker build -t boatui:v0 .
 # Build image => docker build --rm -t boatui:v0 .
 #To run the container => docker run -d -p 4200:80 boatui:v0
+#To run the container => docker run --name baotui -d -p 4200:80 boatui:v0
 #Tag our image with repo in docker hub => docker tag boatui:v0 omarlo/first-repository-ui:v0
 # Push our image => docker push omarlo/first-repository-ui:v0
