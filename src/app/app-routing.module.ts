@@ -10,7 +10,7 @@ const routes: Routes = [
     loadChildren: () => import('./boats/boats.module').then(m => m.BoatsModule),
     canLoad: [ AuthGuard ]
   },
-  { path: '', redirectTo: 'boats', pathMatch: 'full' }
+  { path: '', redirectTo: '/boats', pathMatch: 'full' }
 ];
 
 @NgModule({
