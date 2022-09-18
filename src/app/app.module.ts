@@ -18,11 +18,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    // BoatsRoutingModule, not needed if lazy loading mode
-    AppRoutingModule,
     LayoutModule,
     CoreModule,
-    // BoatsModule not needed if lazy loading mode
+    // BoatsModule, // not needed if lazy loading mode
+    AppRoutingModule,
   ],
   providers: [
     ConfirmationService,
