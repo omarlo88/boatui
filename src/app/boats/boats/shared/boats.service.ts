@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { GenericService } from '../../../shared/api/generic.service';
 import { Boat } from './boat.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

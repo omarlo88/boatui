@@ -7,8 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { CoreModule } from './core/core.module';
-import { BoatsRoutingModule } from './boats/boats-routing.module';
-import { BoatsModule } from './boats/boats.module';
 import { TokenInterceptorInterceptor } from './core/shared/token-interceptor.interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -20,11 +18,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    BoatsRoutingModule,
+    // BoatsRoutingModule, not needed if lazy loading mode
     AppRoutingModule,
     LayoutModule,
     CoreModule,
-    BoatsModule
+    // BoatsModule not needed if lazy loading mode
   ],
   providers: [
     ConfirmationService,
